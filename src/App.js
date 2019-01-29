@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Paddle1 from './components/Paddle1';
+import Paddle2 from './components/Paddle2';
+
 
 class App extends Component {
   render() {
@@ -8,7 +10,9 @@ class App extends Component {
       <div className="App">
       <center>
         <svg className="Screen">
-
+          <Paddle1 />  
+          <Paddle2 />
+          
         </svg>
       </center>
       </div>
