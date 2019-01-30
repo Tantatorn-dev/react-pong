@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
 
-class Paddle2 extends Component {
+class Ball extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            x: 320,
-            y: 40
+            x: 400,
+            y: 300
         }
-        this.handleKeyPress = this.handleKeyPress.bind(this);
+        
     }
 
     componentDidMount() {
@@ -21,13 +21,13 @@ class Paddle2 extends Component {
     }
 
     handleKeyPress(event) {
-       
-    }
+        
+    } 
 
     render() {
-        return <rect x={this.state.x} y={this.state.y} width='170px' height='20px' style={{ fill: 'red' }}></rect>;
+        return <circle cx={this.state.x} cy={this.state.y} r="17" fill="LemonChiffon"></circle>;
     }
 }
 
 
-export default Paddle2;
+export default Ball;

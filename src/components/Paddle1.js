@@ -10,7 +10,8 @@ class Paddle1 extends Component {
             y: 560
         }
         this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.handleEnter = this.handleEnter.bind(this);
+        this.handleLeft = this.handleLeft.bind(this);
+        this.handleRight = this.handleRight.bind(this);
     }
 
     componentDidMount() {
@@ -22,17 +23,28 @@ class Paddle1 extends Component {
     }
 
     handleKeyPress(event) {
-        if (event.keyCode === 13) {
-            this.handleEnter();
+        if (event.keyCode === 37) {
+            this.handleLeft();
+        }
+        else if (event.keyCode == 39) {
+            this.handleRight();
         }
     }
 
-    handleEnter() {
+    handleLeft() { 
+            this.setState({
+                x: this.state.x - 5
+            })     
+    }
 
+    handleRight(){     
+            this.setState({
+                x: this.state.x + 5
+            })
     }
 
     render() {
-        return <rect x={this.state.x} y={this.state.y} width='170px' height='20px' ></rect>;
+        return <rect x={this.state.x} y={this.state.y} width='170px' height='20px' style={{fill:'blue'}}></rect>;
     }
 }
 
