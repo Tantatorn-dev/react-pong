@@ -23,48 +23,62 @@ class Paddle2 extends Component {
 
     componentDidMount() {
         document.addEventListener('keydown', this.handleKeyPress);
-        document.addEventListener('keyup',this.handleKeyUp);
-        this.props.getPos(this.state.x, this.state.y,this.state.direction);
+        document.addEventListener('keyup', this.handleKeyUp);
+        this.props.getPos(this.state.x, this.state.y, this.state.direction);
     }
 
     componentWillUnmount() {
         document.removeEventListener('keydown', this.handleKeyPress);
-        document.removeEventListener('keyup',this.handleKeyUp);
+        document.removeEventListener('keyup', this.handleKeyUp);
     }
 
     handleKeyPress(event) {
         if (event.keyCode === 65) {
             this.handleLeft();
-            this.props.getPos(this.state.x, this.state.y,this.state.direction);
+            this.props.getPos(this.state.x, this.state.y, this.state.direction);
         }
         else if (event.keyCode == 68) {
             this.handleRight();
-            this.props.getPos(this.state.x, this.state.y,this.state.direction);
+            this.props.getPos(this.state.x, this.state.y, this.state.direction);
         }
         this.movePaddle();
     }
 
-    handleKeyUp(){
+    handleKeyUp() {
         this.handleStill();
-        this.props.getPos(this.state.x, this.state.y,this.state.direction);
+        this.props.getPos(this.state.x, this.state.y, this.state.direction);
     }
 
     handleLeft() {
-        this.setState({
-            direction: -1
-        })
+        if (this.state.x <= 0) {
+            this.setState({
+                direction: 0
+            })
+        }
+        else {
+            this.setState({
+                direction: -1
+            })
+        }
     }
 
-    handleStill(){
+    handleStill() {
         this.setState({
             direction: 0
         })
     }
 
     handleRight() {
-        this.setState({
-            direction: 1
-        })
+        if (this.state.x <= 0) {
+            this.setState({
+                direction: 0
+            })
+        }
+        else {
+            this.setState({
+                direction: 1
+            })
+        }
     }
 
     movePaddle() {

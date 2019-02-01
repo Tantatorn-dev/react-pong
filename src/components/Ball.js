@@ -26,23 +26,29 @@ class Ball extends Component {
     }
 
     checkCollision() {
-        if (this.props.y_paddle1 <= this.state.y + 17 && this.state.x >= this.props.x_paddle1 && this.state.x <= this.props.x_paddle1 + 170 && this.props.direction_paddle1 == -1) {
+        if (this.props.y_paddle1 <= this.state.y + 17 && this.props.y_paddle1 >= this.state.y && this.state.x >= this.props.x_paddle1 && this.state.x <= this.props.x_paddle1 + 170 && this.props.direction_paddle1 == -1) {
             this.setState({ dy: -1, dx: -1 });
         }
-        else if (this.props.y_paddle1 <= this.state.y + 17 && this.state.x >= this.props.x_paddle1 && this.state.x <= this.props.x_paddle1 + 170 && this.props.direction_paddle1 == 1) {
+        else if (this.props.y_paddle1 <= this.state.y + 17 && this.props.y_paddle1 >= this.state.y && this.state.x >= this.props.x_paddle1 && this.state.x <= this.props.x_paddle1 + 170 && this.props.direction_paddle1 == 1) {
             this.setState({ dy: -1, dx: 1 });
         }
-        else if (this.props.y_paddle1 <= this.state.y + 17 && this.state.x >= this.props.x_paddle1 && this.state.x <= this.props.x_paddle1 + 170 && this.props.direction_paddle1 == 0) {
+        else if (this.props.y_paddle1 <= this.state.y + 17 && this.props.y_paddle1 >= this.state.y && this.state.x >= this.props.x_paddle1 && this.state.x <= this.props.x_paddle1 + 170 && this.props.direction_paddle1 == 0) {
             this.setState({ dy: -1, dx: 0 });
         }
-        else if (this.props.y_paddle2 >= this.state.y - 37 && this.state.x >= this.props.x_paddle2 && this.state.x <= this.props.x_paddle2 + 170 && this.props.direction_paddle2 == 1) {
+        else if (this.props.y_paddle2 >= this.state.y - 37 && this.props.y_paddle2 <= this.state.y && this.state.x >= this.props.x_paddle2 && this.state.x <= this.props.x_paddle2 + 170 && this.props.direction_paddle2 == 1) {
             this.setState({ dy: 1, dx: 1 });
         }
-        else if (this.props.y_paddle2 >= this.state.y - 37 && this.state.x >= this.props.x_paddle2 && this.state.x <= this.props.x_paddle2 + 170 && this.props.direction_paddle2 == -1) {
+        else if (this.props.y_paddle2 >= this.state.y - 37 && this.props.y_paddle2 <= this.state.y && this.state.x >= this.props.x_paddle2 && this.state.x <= this.props.x_paddle2 + 170 && this.props.direction_paddle2 == -1) {
             this.setState({ dy: 1, dx: -1 });
         }
-        else if (this.props.y_paddle2 >= this.state.y - 37 && this.state.x >= this.props.x_paddle2 && this.state.x <= this.props.x_paddle2 + 170 && this.props.direction_paddle2 == 0) {
+        else if (this.props.y_paddle2 >= this.state.y - 37 && this.props.y_paddle2 <= this.state.y && this.state.x >= this.props.x_paddle2 && this.state.x <= this.props.x_paddle2 + 170 && this.props.direction_paddle2 == 0) {
             this.setState({ dy: 1, dx: 0 });
+        }
+        else if(this.state.x<=0){
+            this.setState({dx:1})
+        }
+        else if(this.state.x>=800){
+            this.setState({dx:-1})
         }
     }
 
