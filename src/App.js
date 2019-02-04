@@ -10,15 +10,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      x_ball: null,
+      y_ball: null,
+
       x_paddle1: null,
       y_paddle1: null,
       direction_paddle1: null,
+
       x_paddle2: null,
       y_paddle2: null,
       direction_paddle2: null
     }
     this.getPaddle1Pos = this.getPaddle1Pos.bind(this);
     this.getPaddle2Pos = this.getPaddle2Pos.bind(this);
+    this.getBall = this.getBall.bind(this);
   }
 
   getPaddle1Pos(posX, posY, direction) {
@@ -37,6 +42,13 @@ class App extends Component {
     });
   }
 
+  getBall(posX, posY) {
+    this.setState({
+      x_ball: posX,
+      y_ball: posY
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -44,8 +56,12 @@ class App extends Component {
 
           <svg className="Screen">
             <Paddle1 getPos={this.getPaddle1Pos} />
-            <Paddle2 getPos={this.getPaddle2Pos} />
+            <Paddle2
+              getPos={this.getPaddle2Pos}
+              x_ball={this.state.x_ball}
+              y_ball={this.state.y_ball} />
             <Ball
+              getPos={this.getBall}
               x_paddle1={this.state.x_paddle1}
               y_paddle1={this.state.y_paddle1}
               direction_paddle1={this.state.direction_paddle1}
@@ -55,7 +71,7 @@ class App extends Component {
           </svg>
 
         </center>
-        <h1>{this.state.x_paddle1}</h1>
+        <h1>{this.state.x_paddle2}</h1>
       </div>
     );
   }

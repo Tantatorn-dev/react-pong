@@ -8,45 +8,59 @@ class Paddle2 extends Component {
         this.state = {
             x: 320,
             y: 40,
-            speed: 10,
-            direction: 0
+            speed: 3,
+            direction: 0,
+            x_ball:null,
+            y_ball:null
         }
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-        this.handleKeyUp = this.handleKeyUp.bind(this);
+        
+        this.updatePosBall = this.updatePosBall.bind(this);
 
         this.handleLeft = this.handleLeft.bind(this);
         this.handleStill = this.handleStill.bind(this);
         this.handleRight = this.handleRight.bind(this);
 
         this.movePaddle = this.movePaddle.bind(this);
+
+        this.returnPos = this.returnPos.bind(this);
+    }
+
+    returnPos(){
+        this.props.getPos(this.state.x,this.state.y,this.state.direction);
     }
 
     componentDidMount() {
-        document.addEventListener('keydown', this.handleKeyPress);
-        document.addEventListener('keyup', this.handleKeyUp);
-        this.props.getPos(this.state.x, this.state.y, this.state.direction);
+        var interval = setInterval(this.returnPos, 10);
+        
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keydown', this.handleKeyPress);
-        document.removeEventListener('keyup', this.handleKeyUp);
+        clearInterval(this.interval);
     }
 
-    handleKeyPress(event) {
-        if (event.keyCode === 65) {
-            this.handleLeft();
-            this.props.getPos(this.state.x, this.state.y, this.state.direction);
+    componentWillReceiveProps(nextProps){
+
+        this.setState({
+            x_ball:nextProps.x_ball,
+            y_ball:nextProps.y_ball
+        })
+
+        this.updatePosBall();
+
+    }
+    
+    updatePosBall() {
+
+        if(this.state.x_ball<this.state.x+170 && this.state.x_ball>this.state.x){
+            this.handleStill();
         }
-        else if (event.keyCode == 68) {
+        else if(this.state.x_ball<=this.state.x){
+            this.handleLeft();
+        }
+        else if(this.state.x_ball>=this.state.x+170){
             this.handleRight();
-            this.props.getPos(this.state.x, this.state.y, this.state.direction);
         }
         this.movePaddle();
-    }
-
-    handleKeyUp() {
-        this.handleStill();
-        this.props.getPos(this.state.x, this.state.y, this.state.direction);
     }
 
     handleLeft() {
@@ -69,7 +83,7 @@ class Paddle2 extends Component {
     }
 
     handleRight() {
-        if (this.state.x <= 0) {
+        if (this.state.x >= 800) {
             this.setState({
                 direction: 0
             })

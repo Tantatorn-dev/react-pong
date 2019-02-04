@@ -13,8 +13,11 @@ class Ball extends Component {
             dy: 1,
             speed: 3
         }
+
         this.updatePosition = this.updatePosition.bind(this);
         this.checkCollision = this.checkCollision.bind(this);
+
+        this.reset = this.reset.bind(this);
     }
 
     componentDidMount() {
@@ -23,6 +26,17 @@ class Ball extends Component {
 
     componentWillUnmount() {
         clearInterval(this.interval);
+    }
+
+    reset() {
+        if (this.state.y >= 600) {
+            this.setState({
+                x: 400,
+                y: 300,
+                dx: 0,
+                dy: 1,
+            })
+        }
     }
 
     checkCollision() {
@@ -44,20 +58,22 @@ class Ball extends Component {
         else if (this.props.y_paddle2 >= this.state.y - 37 && this.props.y_paddle2 <= this.state.y && this.state.x >= this.props.x_paddle2 && this.state.x <= this.props.x_paddle2 + 170 && this.props.direction_paddle2 == 0) {
             this.setState({ dy: 1, dx: 0 });
         }
-        else if(this.state.x<=0){
-            this.setState({dx:1})
+        else if (this.state.x <= 0) {
+            this.setState({ dx: 1 })
         }
-        else if(this.state.x>=800){
-            this.setState({dx:-1})
+        else if (this.state.x >= 800) {
+            this.setState({ dx: -1 })
         }
     }
 
     updatePosition() {
+        this.reset();
         this.checkCollision();
         this.setState({
             x: this.state.x + this.state.dx * this.state.speed,
             y: this.state.y + this.state.dy * this.state.speed
         });
+        this.props.getPos(this.state.x, this.state.y);
     }
 
     render() {
